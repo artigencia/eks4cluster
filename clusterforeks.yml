@@ -1,0 +1,24 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+   name: clusterforeks
+   region: ap-south-1
+
+nodeGroups:
+   - name: ng01
+     desiredCapacity: 2
+     instanceType: t2.micro
+     ssh:
+          publicKeyName: key4ekscluster
+   - name: ng02-mixed
+     minSize: 2
+     maxSize: 5
+     instancesDistribution:
+         maxPrice: 0.017
+         instanceTypes: ["t2.micro"]
+         onDemandBaseCapacity: 0
+         onDemandPercentageAboveBaseCapacity: 50
+         spotInstancePools: 2
+     ssh:
+           publicKeyName: key4ekscluster
